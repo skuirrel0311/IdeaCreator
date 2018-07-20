@@ -15,7 +15,9 @@ public class MemoPanel : Panel
     [SerializeField]
     UGUIButton backButton = null;
 
-    MemoViewElement[] elements;
+    Dictionary<string, MemoViewElement> elements = new Dictionary<string, MemoViewElement>();
+
+    bool isLongPushed;
 
     void Start()
     {
@@ -35,16 +37,16 @@ public class MemoPanel : Panel
         Vector2 containerSize = elementContainer.sizeDelta;
         containerSize.y = ElementSize * memoList.Count;
         elementContainer.sizeDelta = containerSize;
-
-        elements = new MemoViewElement[memoList.Count];
+        
         for (int i = 0; i < memoList.Count; i++)
         {
             MemoViewElement element;
             element = memoViewElementPool.GetInstance();
             element.Init(memoList[i]);
-            elements[i] = element;
+            elements.Add(memoList[i].ID, element);
             element.OnClick.RemoveAllListeners();
             element.OnClick.AddListener(() => ShowMemo(element.Memo));
+            element.OnLongPush.AddListener(() => ShowMemoDeleteDialog(element.Memo));
         }
     }
 
@@ -60,11 +62,25 @@ public class MemoPanel : Panel
         memoEditDialog.Show();
     }
 
+    void ShowMemoDeleteDialog(Memo memo)
+    {
+        OkCancelDialog dialog = DialogDisplayer.Instance.ShowDialog<OkCancelDialog>("MemoDeleteDialog");
+
+        dialog.Init(() =>
+        {
+            MemoViewElement element;
+            if (!elements.TryGetValue(memo.ID, out element)) return;
+
+            UserDataManager.Instance.MemoWriter.RemoveMemo(memo);
+            memoViewElementPool.ReturnInstance(element); 
+        },()=> { });
+    }
+
     public void Refresh()
     {
-        for (int i = 0; i < elements.Length; i++)
+        foreach(string key in elements.Keys)
         {
-            elements[i].Refresh();
+            elements[key].Refresh();
         }
     }
 }

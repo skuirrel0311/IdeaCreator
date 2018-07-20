@@ -14,4 +14,10 @@ public class UIManager : SingletonMonobehaviour<UIManager>
     [SerializeField]
     MemoPanel memoPanel = null;
     public MemoPanel MemoPanel { get { return memoPanel; } }
+
+    [ContextMenu("Delete")]
+    public void DeleteData()
+    {
+        MyPlayerPrefs.DeleteAll();
+    }
 }

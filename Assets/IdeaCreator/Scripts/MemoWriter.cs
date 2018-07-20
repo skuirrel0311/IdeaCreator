@@ -12,7 +12,6 @@ public class MemoWriter
     Dictionary<string, Memo> memoDictionary = new Dictionary<string, Memo>();
     RegisterStringParameter memoDataJson;
     
-
     public MemoWriter()
     {
         memoDataJson = new RegisterStringParameter("MemoData", string.Empty);
@@ -27,6 +26,13 @@ public class MemoWriter
         memoList.Add(memo);
     }
 
+    public void RemoveMemo(Memo memo)
+    {
+        memoDictionary.Remove(memo.ID);
+        memoList.Remove(memo);
+        SaveMemo();
+    }
+    
     public Memo GetMemo(string id)
     {
         Memo memo;
@@ -65,7 +71,7 @@ public class MemoWriter
 
         for(int i = 0;i < file.dataArray.Length;i++)
         {
-            memoList.Add(new Memo(file.dataArray[i]));
+            AddMemo(new Memo(file.dataArray[i]));
         }
     }
 }
