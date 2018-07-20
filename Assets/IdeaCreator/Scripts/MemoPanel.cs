@@ -53,6 +53,7 @@ public class MemoPanel : Panel
     public override void Deactivate()
     {
         memoViewElementPool.ReturnAllInstance();
+        elements.Clear();
         base.Deactivate();
     }
 
