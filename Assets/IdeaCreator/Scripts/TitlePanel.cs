@@ -13,8 +13,6 @@ public class TitlePanel : Panel
 
     [SerializeField]
     InputField userNameInputField = null;
-
-    RegisterStringParameter userName;
     
     void Start()
     {
@@ -22,7 +20,7 @@ public class TitlePanel : Panel
         {
             Deactivate();
             UIManager.Instance.IdeaCreatorPanel.Activate();
-            userName.SetValue(userNameInputField.text);
+            UserDataManager.Instance.UserName.SetValue(userNameInputField.text);
         });
 
         gotoMemoButton.OnClick.AddListener(() =>
@@ -36,9 +34,8 @@ public class TitlePanel : Panel
             gotoIdeaCreatorButton.Interactable = !string.IsNullOrEmpty(name);
             
         });
-
-        userName = new RegisterStringParameter("UserName", "");
-        userNameInputField.text = userName.GetValue();
-        gotoIdeaCreatorButton.Interactable = !string.IsNullOrEmpty(userName.GetValue());
+        
+        userNameInputField.text = UserDataManager.Instance.UserName.GetValue();
+        gotoIdeaCreatorButton.Interactable = !string.IsNullOrEmpty(userNameInputField.text);
     }
 }

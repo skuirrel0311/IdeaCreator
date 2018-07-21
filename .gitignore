@@ -46,3 +46,6 @@ sysinfo.txt #Unity3D Generated File On Crash Reports
 .vs/animal-jump/v15/Server/sqlite3/storage.ide
 .vs/animal-jump/v15/Server/sqlite3/db.lock
 .vs/animal-jump/DesignTimeBuild/.dtbcache
+*.ide-wal
+*.ide-shm
+*.ide

@@ -56,6 +56,7 @@ public class MemoWriter
             data.original_game_name = memo.OriginalGameName;
             data.change_point = memo.ChangePoint;
             data.date = memo.Date;
+            data.author = memo.Author;
 
             file.dataArray[i] = data;
         }

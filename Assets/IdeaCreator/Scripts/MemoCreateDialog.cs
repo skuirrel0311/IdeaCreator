@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanekoUtilities;
 
 public class MemoCreateDialog : MemoViewDialog
 {
+    protected override void Start()
+    {
+        base.Start();
+        title.onValueChanged.AddListener((text) =>
+        {
+            saveButton.Interactable = !string.IsNullOrEmpty(text);
+        });
+    }
+
     public void Init(string originalGameTitle, string changePoint)
     {
         gameTitle.Text = originalGameTitle;

@@ -31,11 +31,7 @@ public class MemoViewDialog : Dialog
         saveButton.OnClick.AddListener(OnSave);
 
         cancelButton.OnClick.AddListener(Hide);
-
-        title.onValueChanged.AddListener((text) =>
-        {
-            saveButton.Interactable = !string.IsNullOrEmpty(text);
-        });
+        
         saveButton.Interactable = false;
     }
     

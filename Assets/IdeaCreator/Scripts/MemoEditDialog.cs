@@ -7,6 +7,17 @@ public class MemoEditDialog : MemoViewDialog
 {
     Memo memo;
 
+    protected override void Start()
+    {
+        base.Start();
+        title.onValueChanged.AddListener((text) =>
+        {
+            bool isInteractable = !string.IsNullOrEmpty(text) && text != memo.Title;
+            saveButton.Interactable = isInteractable;
+            UIManager.Instance.MemoPanel.Refresh();
+        });
+    }
+
     public void Init(Memo memo)
     {
         this.memo = memo;
