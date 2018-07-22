@@ -9,8 +9,10 @@ namespace KanekoUtilities
         OutQuad, OutCubic, OutQuart, OutQuint, OutExpo, OutBack,
         InOutQuad, InOutCubic, InOutQuart, InOutQuint, InOutExpo, InOutBack
     }
+    
     public static class Easing
     {
+        
         public static float Linear(float x)
         {
             return x;

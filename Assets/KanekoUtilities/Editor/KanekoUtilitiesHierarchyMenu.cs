@@ -60,7 +60,7 @@ namespace KanekoUtilities
         [MenuItem("GameObject/KKUtilities/Canvas", false, 20)]
         public static void CreateCanvas()
         {
-            CreateObject(UIPrefabDirectory, "Canvas");
+            CreateObject("Assets/KanekoUtilities/Prefabs/UI/", "Canvas");
         }
 
         [MenuItem("GameObject/KKUtilities/Text3D/Text", false, 20)]

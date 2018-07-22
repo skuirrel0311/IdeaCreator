@@ -8,22 +8,21 @@ public class GameData
     public string Title;
     public int USRanking;
     public int TopCount;
+    public string Publisher;
     public int Potential
     {
         get
         {
             int potential = 0;
 
-            if (potential > 0)
-            {
-                potential += TopCount / 10;
-            }
+            if (TopCount > 20) potential += 3;
+            else if (TopCount > 10) potential += 2;
+            else if (TopCount > 5) potential += 1;
 
-            if (USRanking < 10) potential += 3;
-            else if (USRanking < 20) potential += 2;
-            else if (USRanking < 30) potential += 1;
+            if (USRanking <= 3) potential += 2;
+            else if (USRanking < 20) potential += 1;
 
-            return Mathf.Clamp(potential, 0 , 10);
+            return potential;
         }
     }
 }

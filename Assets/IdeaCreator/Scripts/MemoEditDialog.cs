@@ -14,7 +14,6 @@ public class MemoEditDialog : MemoViewDialog
         {
             bool isInteractable = !string.IsNullOrEmpty(text) && text != memo.Title;
             saveButton.Interactable = isInteractable;
-            UIManager.Instance.MemoPanel.Refresh();
         });
     }
 

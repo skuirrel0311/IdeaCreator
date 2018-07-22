@@ -13,19 +13,23 @@ public class IdeaCreatorPanel : Panel
     UGUIButton showVideoButton = null;
     [SerializeField]
     UGUIButton backButton = null;
+    [SerializeField]
+    UGUIButton showGameDataButton = null;
 
     [SerializeField]
     UGUITextUnity gameTitle = null;
     [SerializeField]
     UGUITextUnity changePoint = null;
-    [SerializeField]
-    NumberText potential = null;
 
     [SerializeField]
     MemoCreateDialog memoCreateDialog = null;
+    [SerializeField]
+    GameDataDialog gameDataDialog = null;
 
     IdeaCreator ideaCreator;
-    
+    Idea idea;
+
+
     void Start()
     {
         ideaCreator = new IdeaCreator();
@@ -45,6 +49,12 @@ public class IdeaCreatorPanel : Panel
             Deactivate();
             UIManager.Instance.TitlePanel.Activate();
         });
+
+        showGameDataButton.OnClick.AddListener(() =>
+        {
+            gameDataDialog.Init(idea.GameData);
+            gameDataDialog.Show();
+        });
     }
 
     public override void Activate()
@@ -55,10 +65,9 @@ public class IdeaCreatorPanel : Panel
 
     void SetIdea()
     {
-        Idea idea = ideaCreator.Create();
+        idea = ideaCreator.Create();
 
         gameTitle.Text = idea.GameData.Title;
-        potential.SetValue(idea.GameData.Potential);
         changePoint.Text = idea.changePointText;
     }
 

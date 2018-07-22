@@ -21,7 +21,7 @@ public class IdeaCreator
         changePointList = ImportChangePointData();
 
         List<int> gameDataPotentialList = new List<int>();
-        for (int i = 0;i< gameDataList.Count;i++)
+        for (int i = 0; i < gameDataList.Count; i++)
         {
             gameDataPotentialList.Add(gameDataList[i].Potential);
         }
@@ -42,9 +42,9 @@ public class IdeaCreator
             temp = csvData[i];
             data = new GameData();
             data.Title = temp[0];
-            data.USRanking = TextImpoter.StringToInt(temp[1]);
-
-            data.TopCount = TextImpoter.StringToInt(temp[2]);
+            data.TopCount = TextImpoter.StringToInt(temp[1]);
+            data.USRanking = TextImpoter.StringToInt(temp[2]);
+            data.Publisher = temp[3];
 
             gameDataList.Add(data);
         }
@@ -79,7 +79,7 @@ public class IdeaCreator
     GameData GetRandomGame()
     {
         int index = KKUtilities.GetRandomIndexWithWeight(potentialArray);
-        
+
         return gameDataList[index];
     }
     string GetRandomChangePointText()

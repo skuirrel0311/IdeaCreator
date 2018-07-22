@@ -26,6 +26,11 @@ public class MemoPanel : Panel
             Deactivate();
             UIManager.Instance.TitlePanel.Activate();
         });
+
+        memoEditDialog.OnHideAnimationEnd.AddListener(() =>
+        {
+            Refresh();
+        });
     }
 
     public override void Activate()
@@ -46,6 +51,7 @@ public class MemoPanel : Panel
             elements.Add(memoList[i].ID, element);
             element.OnClick.RemoveAllListeners();
             element.OnClick.AddListener(() => ShowMemo(element.Memo));
+            element.OnLongPush.RemoveAllListeners();
             element.OnLongPush.AddListener(() => ShowMemoDeleteDialog(element.Memo));
         }
     }
@@ -73,7 +79,7 @@ public class MemoPanel : Panel
             if (!elements.TryGetValue(memo.ID, out element)) return;
 
             UserDataManager.Instance.MemoWriter.RemoveMemo(memo);
-            memoViewElementPool.ReturnInstance(element); 
+            memoViewElementPool.ReturnInstance(element);
         },()=> { });
     }
 
